@@ -1,0 +1,8 @@
+### IDE's ###
+**/.idea/**
+**/.vscode/**
+**/out/*
+
+### Helm ###
+**/charts/*.tgz
+**/Chart.lock
