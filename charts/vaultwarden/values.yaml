@@ -1,0 +1,101 @@
+# Default values for vaultwarden.
+
+replicaCount: 1
+
+image:
+  repository: vaultwarden/server
+  pullPolicy: IfNotPresent
+  tag: "1.23.0-alpine"
+
+vaultwarden:
+  environment: "production"
+  rocketPort: 8080
+  extraEnvironmentVars: {}
+#    DOMAIN: "https://bitwarden.example.com"
+#    SIGNUPS_ALLOWED: false
+#    SIGNUPS_VERIFY: false
+#    EXTENDED_LOGGING: true
+#    LOG_LEVEL: "info"
+
+initContainers: {}
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+podSecurityContext: {}
+#  runAsUser: 1000
+#  runAsGroup: 1000
+#  fsGroup: 1000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+## persistent volume
+persistence:
+  enabled: false
+  accessMode: ReadWriteOnce
+  size: 1Gi
+  # storageClass:
+  # existingClaim: "vaultwarden-pvc"
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: vaultwarden.example.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: vaultwarden-tls
+  #    hosts:
+  #      - vaultwarden.example.com
+
+livenessProbe:
+  httpGet:
+    path: /alive
+    port: http
+
+readinessProbe:
+  httpGet:
+    path: /alive
+    port: http
+
+resources: {}
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # limits:
+  #   cpu: 200m
+  #   memory: 256Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 75
+  targetMemoryUtilizationPercentage: 75
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

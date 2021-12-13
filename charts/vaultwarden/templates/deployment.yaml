@@ -1,0 +1,107 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "vaultwarden.fullname" . }}
+  labels:
+    {{- include "vaultwarden.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "vaultwarden.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "vaultwarden.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "vaultwarden.serviceAccountName" . }}
+      securityContext:
+        {{- if eq .Values.vaultwarden.environment "production"}}
+        runAsNonRoot: true
+        runAsGroup: {{ .Values.podSecurityContext.gid | default 1000 }}
+        runAsUser: {{ .Values.podSecurityContext.uid | default 1000 }}
+        fsGroup: {{ .Values.podSecurityContext.gid | default 1000 }}
+        {{- else }}
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+        {{- end }}
+      {{- if .Values.initContainers }}
+      initContainers:
+        {{- range $name, $properties := .Values.initContainers }}
+        - name: {{ $name | quote }}
+        {{- toYaml $properties | nindent 10 }}
+        {{- end }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- if eq .Values.vaultwarden.environment "production"}}
+            allowPrivilegeEscalation: false
+            {{- else }}
+            {{- toYaml .Values.securityContext | nindent 12 }}
+            {{- end }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if eq .Values.vaultwarden.environment "production"}}
+          env:
+            - name: ROCKET_PORT
+              value: {{ .Values.vaultwarden.rocketPort | quote }}
+          {{- include "vaultwarden.extraEnvironmentVars" .Values | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: data
+              mountPath: /data
+              {{- if and .Values.persistence.enabled .Values.persistence.subPath }}
+              subPath: {{ .Values.persistence.subPath }}
+              {{- end }}
+          ports:
+            - name: http
+              {{- if eq .Values.vaultwarden.environment "production"}}
+              containerPort: {{ .Values.vaultwarden.rocketPort }}
+              {{- else }}
+              containerPort: 80
+              {{- end }}
+              protocol: TCP
+          {{- with .Values.livenessProbe }}
+          livenessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.readinessProbe }}
+          readinessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+        - name: data
+          {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            {{ if .Values.persistence.existingClaim }}
+            claimName: {{ .Values.persistence.existingClaim }}
+            {{- else }}
+            claimName: {{ template "vaultwarden.fullname" . }}
+            {{- end }}
+          {{- else }}
+          emptyDir: {}
+          {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
