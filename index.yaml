@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  vaultwarden:
+  - apiVersion: v2
+    appVersion: 1.23.0
+    created: "2021-12-17T21:35:01.21501563Z"
+    description: A Helm chart for deploying Vaultwarden to Kubernetes
+    digest: a1b19bf5091c3bc93bb261cece475a1db4ea10f28b8123f72ae916e372114f93
+    name: vaultwarden
+    type: application
+    urls:
+    - https://sebastiangaiser.github.io/helm-charts/vaultwarden-0.1.0.tgz
+    version: 0.1.0
+generated: "2021-12-17T21:35:01.214135483Z"
