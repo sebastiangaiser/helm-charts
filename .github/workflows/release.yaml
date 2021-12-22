@@ -13,9 +13,8 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Publish Helm charts
-        uses: helm/chart-releaser-action@v1.2.0
+        uses: helm/chart-releaser-action@v1.1.0
         with:
           charts_dir: charts
-#          config: cr.yaml
         env:
           CR_TOKEN: "${{ secrets.CR_TOKEN }}"
