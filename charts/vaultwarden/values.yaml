@@ -54,6 +54,9 @@ persistence:
   # storageClass:
   # existingClaim: "vaultwarden-pvc"
 
+additionalVolumeMounts: []
+additionalVolumes: {}
+
 ingress:
   enabled: false
   className: ""

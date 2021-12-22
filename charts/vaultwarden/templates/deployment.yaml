@@ -38,7 +38,7 @@ spec:
       initContainers:
         {{- range $name, $properties := .Values.initContainers }}
         - name: {{ $name | quote }}
-        {{- toYaml $properties | nindent 10 }}
+          {{- toYaml $properties | nindent 10 }}
         {{- end }}
       {{- end }}
       containers:
@@ -63,6 +63,9 @@ spec:
               {{- if and .Values.persistence.enabled .Values.persistence.subPath }}
               subPath: {{ .Values.persistence.subPath }}
               {{- end }}
+            {{- with .Values.additionalVolumeMounts }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
           ports:
             - name: http
               {{- if eq .Values.vaultwarden.environment "production"}}
@@ -93,6 +96,10 @@ spec:
           {{- else }}
           emptyDir: {}
           {{- end }}
+        {{- range $name, $properties := .Values.additionalVolumes }}
+        - name: {{ $name | quote }}
+          {{- toYaml $properties | nindent 10 }}
+        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
