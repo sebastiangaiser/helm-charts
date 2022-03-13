@@ -24,7 +24,7 @@ A Helm chart for deploying Vaultwarden to Kubernetes
 | fullnameOverride | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"vaultwarden/server"` |  |
-| image.tag | string | `"1.23.1-alpine"` |  |
+| image.tag | string | `"1.24.0-alpine"` |  |
 | imagePullSecrets | list | `[]` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.className | string | `""` |  |
