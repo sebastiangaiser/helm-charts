@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "**/Chart.yaml"
 
 jobs:
   release:
@@ -11,10 +13,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
-      - name: Publish Helm charts
-        uses: helm/chart-releaser-action@v1.1.0
         with:
-          charts_dir: charts
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.2.1
         env:
-          CR_TOKEN: "${{ secrets.CR_TOKEN }}"
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
