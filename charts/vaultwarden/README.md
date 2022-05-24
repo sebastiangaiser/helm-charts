@@ -1,6 +1,6 @@
 # vaultwarden
 
-![Version: 0.5.1](https://img.shields.io/badge/Version-0.5.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.25.0](https://img.shields.io/badge/AppVersion-1.25.0-informational?style=flat-square)
+![Version: 0.5.2](https://img.shields.io/badge/Version-0.5.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.25.0](https://img.shields.io/badge/AppVersion-1.25.0-informational?style=flat-square)
 
 A Helm chart for deploying Vaultwarden to Kubernetes
 
@@ -16,12 +16,12 @@ A Helm chart for deploying Vaultwarden to Kubernetes
 | additionalVolumeMounts | list | `[]` |  |
 | additionalVolumes | object | `{}` |  |
 | affinity | object | `{}` |  |
-| autoscaling.enabled | bool | `false` |  |
-| autoscaling.maxReplicas | int | `3` |  |
-| autoscaling.minReplicas | int | `1` |  |
-| autoscaling.targetCPUUtilizationPercentage | int | `75` |  |
-| autoscaling.targetMemoryUtilizationPercentage | int | `75` |  |
 | fullnameOverride | string | `""` |  |
+| horizontalAutoscaling.enabled | bool | `false` |  |
+| horizontalAutoscaling.maxReplicas | int | `3` |  |
+| horizontalAutoscaling.minReplicas | int | `1` |  |
+| horizontalAutoscaling.targetCPUUtilizationPercentage | int | `75` |  |
+| horizontalAutoscaling.targetMemoryUtilizationPercentage | int | `75` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"vaultwarden/server"` |  |
 | image.tag | string | `"1.25.0-alpine"` |  |
