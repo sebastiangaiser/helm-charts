@@ -97,6 +97,10 @@ autoscaling:
   targetCPUUtilizationPercentage: 75
   targetMemoryUtilizationPercentage: 75
 
+verticalAutoscaling:
+  enabled: false
+  updateMode: "Off"
+
 nodeSelector: {}
 
 tolerations: []
