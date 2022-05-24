@@ -74,12 +74,12 @@ ingress:
 
 livenessProbe:
   httpGet:
-    path: /alive
+    path: /api/alive
     port: http
 
 readinessProbe:
   httpGet:
-    path: /alive
+    path: /api/alive
     port: http
 
 resources: {}
