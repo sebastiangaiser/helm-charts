@@ -1,0 +1,22 @@
+name: Helm docs
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    name: Lint Code Base
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Check Docs
+        run: |
+          docker run --rm --pull always --volume "$(pwd):/helm-docs" -u "$(id -u)" jnorwood/helm-docs:v1.9.1
+          if ! git diff --exit-code; then
+              echo "Documentation not up to date. Please run helm-docs and commit changes!" >&2
+              exit 1
+          fi

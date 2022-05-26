@@ -7,7 +7,7 @@ repos:
     rev: v4.2.0
     hooks:
       - id: check-json
-      - id: check-yaml
+#      - id: check-yaml
   - repo: https://github.com/jumanjihouse/pre-commit-hooks
     rev: 2.1.6
     hooks:
