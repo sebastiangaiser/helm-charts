@@ -34,8 +34,30 @@ spec:
         {{- else }}
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
         {{- end }}
-      {{- if .Values.initContainers }}
+      {{- if ( or .Values.initContainers .Values.postgresql.enabled ) }}
       initContainers:
+        {{- if .Values.postgresql.enabled }}
+        - name: check-postgresql-ready
+          image: "postgres:{{ .Values.postgresql.version }}"
+          command: ['bash', '-c',
+            'until pg_isready; do echo waiting for database be ready; sleep 2; done;']
+          args: []
+          env:
+            - name: PGHOST
+              value: {{ .Values.postgresql.teamId | default "acid" }}-{{ include "vaultwarden.fullname" . }}
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ include "vaultwarden.fullname" . }}.{{ .Values.postgresql.teamId | default "acid" }}-{{ include "vaultwarden.fullname" . }}.credentials.postgresql.acid.zalan.do"
+                  key: "username"
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ include "vaultwarden.fullname" . }}.{{ .Values.postgresql.teamId | default "acid" }}-{{ include "vaultwarden.fullname" . }}.credentials.postgresql.acid.zalan.do"
+                  key: "password"
+            - name: PGDATABASE
+              value: {{ include "vaultwarden.fullname" . }}
+        {{- end }}
         {{- range $name, $properties := .Values.initContainers }}
         - name: {{ $name | quote }}
           {{- toYaml $properties | nindent 10 }}
@@ -55,6 +77,22 @@ spec:
           env:
             - name: ROCKET_PORT
               value: {{ .Values.vaultwarden.rocketPort | quote }}
+          {{- if .Values.postgresql.enabled }}
+            - name: POSTGRES_HOST
+              value: {{ .Values.postgresql.teamId | default "acid" }}-{{ include "vaultwarden.fullname" . }}
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ include "vaultwarden.fullname" . }}.{{ .Values.postgresql.teamId | default "acid" }}-{{ include "vaultwarden.fullname" . }}.credentials.postgresql.acid.zalan.do"
+                  key: "username"
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ include "vaultwarden.fullname" . }}.{{ .Values.postgresql.teamId | default "acid" }}-{{ include "vaultwarden.fullname" . }}.credentials.postgresql.acid.zalan.do"
+                  key: "password"
+            - name: DATABASE_URL
+              value: "postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(POSTGRES_HOST):5432/{{ include "vaultwarden.fullname" . }}"
+          {{- end }}
           {{- include "vaultwarden.extraEnvironmentVars" .Values | nindent 12 }}
           {{- end }}
           volumeMounts:

@@ -4,5 +4,5 @@ target-branch: main
 chart-dirs:
   - charts
 chart-repos:
-  - stable=https://charts.helm.sh/stable
+  - postgres-operator-charts=https://opensource.zalando.com/postgres-operator/charts/postgres-operator
 helm-extra-args: --timeout 600s
