@@ -77,6 +77,13 @@ spec:
           env:
             - name: ROCKET_PORT
               value: {{ .Values.vaultwarden.rocketPort | quote }}
+          {{- if ne .Values.vaultwarden.adminToken.value "disabled" }}
+            - name: ADMIN_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "vaultwarden.fullname" . }}-admin-token
+                  key: admin-token
+          {{- end }}
           {{- if .Values.postgresql.enabled }}
             - name: POSTGRES_HOST
               value: {{ .Values.postgresql.teamId | default "acid" }}-{{ include "vaultwarden.fullname" . }}
