@@ -1,0 +1,26 @@
+{{- if .Values.postgresql.enabled }}
+apiVersion: "acid.zalan.do/v1"
+kind: "postgresql"
+metadata:
+  name: {{ .Values.postgresql.teamId | default "acid" }}-{{ include "vaultwarden.fullname" . }}
+  labels:
+    team: {{ .Values.postgresql.teamId | default "acid" }}
+      {{- include "vaultwarden.labels" . | nindent 4 }}
+spec:
+  teamId: {{ .Values.postgresql.teamId | default "acid" }}
+  postgresql:
+    version: {{ .Values.postgresql.version | quote }}
+  numberOfInstances: {{ .Values.postgresql.instances }}
+  volume:
+    size: {{ .Values.postgresql.size | quote }}
+  users:
+    {{ include "vaultwarden.fullname" . }}: []
+  databases:
+    {{ include "vaultwarden.fullname" . }}: "{{ include "vaultwarden.fullname" . }}" #dbname: owner
+  allowedSourceRanges: []
+  resources:
+    {{- toYaml .Values.postgresql.resources | nindent 4 }}
+  {{- with .Values.postgresql.additionalConfiguration }}
+  {{- toYaml . | nindent 2 }}
+  {{- end }}
+{{- end }}

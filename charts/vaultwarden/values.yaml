@@ -51,11 +51,26 @@ persistence:
   enabled: false
   accessMode: ReadWriteOnce
   size: 1Gi
+  # subPath:
   # storageClass:
   # existingClaim: "vaultwarden-pvc"
 
 additionalVolumeMounts: []
 additionalVolumes: {}
+
+postgresql:
+  enabled: false
+  version: "14"
+  instances: 1
+  size: 1Gi
+  resources:
+    requests:
+      cpu: 250m
+      memory: 250Mi
+    limits:
+      cpu: 500m
+      memory: 500Mi
+  additionalConfiguration: {}
 
 ingress:
   enabled: false
