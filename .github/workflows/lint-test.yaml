@@ -51,7 +51,8 @@ jobs:
 
       - name: Install Zalando's postgres-operator
         run: |
-          helm upgrade --install --atomic postgres-operator postgres-operator-charts/postgres-operator
+          helm install postgres-operator postgres-operator-charts/postgres-operator
+        if: steps.list-changed.outputs.changed == 'true'
 
       - name: Run chart-testing (install)
         run: ct install --config .github/ct.yaml
