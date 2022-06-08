@@ -10,6 +10,9 @@ image:
 vaultwarden:
   environment: "production"
   rocketPort: 8080
+  adminToken:
+    # possible values are 'generated', 'disabled' or any specific value
+    value: "disabled"
   extraEnvironmentVars: {}
 #    DOMAIN: "https://bitwarden.example.com"
 #    SIGNUPS_ALLOWED: false
