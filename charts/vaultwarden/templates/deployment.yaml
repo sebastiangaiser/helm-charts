@@ -27,10 +27,10 @@ spec:
       serviceAccountName: {{ include "vaultwarden.serviceAccountName" . }}
       securityContext:
         {{- if eq .Values.vaultwarden.environment "production"}}
-        runAsNonRoot: true
-        runAsGroup: {{ .Values.podSecurityContext.gid | default 1000 }}
-        runAsUser: {{ .Values.podSecurityContext.uid | default 1000 }}
-        fsGroup: {{ .Values.podSecurityContext.gid | default 1000 }}
+        runAsNonRoot: {{ .Values.podSecurityContext.runAsNonRoot | default true }}
+        runAsUser: {{ .Values.podSecurityContext.runAsUser | default 1000 }}
+        runAsGroup: {{ .Values.podSecurityContext.runAsGroup | default 1000 }}
+        fsGroup: {{ .Values.podSecurityContext.fsGroup | default 1000 }}
         {{- else }}
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
         {{- end }}

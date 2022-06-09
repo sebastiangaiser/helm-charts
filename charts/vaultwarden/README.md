@@ -1,6 +1,6 @@
 # vaultwarden
 
-![Version: 0.7.0](https://img.shields.io/badge/Version-0.7.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.25.0](https://img.shields.io/badge/AppVersion-1.25.0-informational?style=flat-square)
+![Version: 0.7.1](https://img.shields.io/badge/Version-0.7.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.25.0](https://img.shields.io/badge/AppVersion-1.25.0-informational?style=flat-square)
 
 A Helm chart for deploying Vaultwarden to Kubernetes
 
@@ -19,34 +19,21 @@ A Helm chart for deploying Vaultwarden to Kubernetes
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| additionalVolumeMounts | list | `[]` |  |
-| additionalVolumes | object | `{}` |  |
-| affinity | object | `{}` |  |
+| additionalVolumeMounts | list | `[]` | Additional volume mounts |
+| additionalVolumes | object | `{}` | Additional volumes |
+| affinity | object | `{}` | Affinities |
 | fullnameOverride | string | `""` |  |
-| horizontalAutoscaling.enabled | bool | `false` |  |
-| horizontalAutoscaling.maxReplicas | int | `3` |  |
-| horizontalAutoscaling.minReplicas | int | `1` |  |
-| horizontalAutoscaling.targetCPUUtilizationPercentage | int | `75` |  |
-| horizontalAutoscaling.targetMemoryUtilizationPercentage | int | `75` |  |
+| horizontalAutoscaling | object | `{"enabled":false,"maxReplicas":3,"minReplicas":1,"targetCPUUtilizationPercentage":75,"targetMemoryUtilizationPercentage":75}` | HPA configuration |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"vaultwarden/server"` |  |
 | image.tag | string | `"1.25.0-alpine"` |  |
 | imagePullSecrets | list | `[]` |  |
-| ingress.annotations | object | `{}` |  |
-| ingress.className | string | `""` |  |
-| ingress.enabled | bool | `false` |  |
-| ingress.hosts[0].host | string | `"vaultwarden.example.com"` |  |
-| ingress.hosts[0].paths[0].path | string | `"/"` |  |
-| ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
-| ingress.tls | list | `[]` |  |
-| initContainers | object | `{}` |  |
-| livenessProbe.httpGet.path | string | `"/api/alive"` |  |
-| livenessProbe.httpGet.port | string | `"http"` |  |
+| ingress | object | `{"annotations":{},"className":"","enabled":false,"hosts":[{"host":"vaultwarden.example.com","paths":[{"path":"/","pathType":"ImplementationSpecific"}]}],"tls":[]}` | Ingress |
+| initContainers | object | `{}` | Init-containers |
+| livenessProbe | object | `{"httpGet":{"path":"/api/alive","port":"http"}}` | Liveness probe |
 | nameOverride | string | `""` |  |
-| nodeSelector | object | `{}` |  |
-| persistence.accessMode | string | `"ReadWriteOnce"` |  |
-| persistence.enabled | bool | `false` |  |
-| persistence.size | string | `"1Gi"` |  |
+| nodeSelector | object | `{}` | Node selectors |
+| persistence | object | `{"accessMode":"ReadWriteOnce","enabled":false,"size":"1Gi"}` | Persistent volume |
 | podAnnotations | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
 | postgresql.additionalConfiguration | object | `{}` |  |
@@ -58,23 +45,19 @@ A Helm chart for deploying Vaultwarden to Kubernetes
 | postgresql.resources.requests.memory | string | `"250Mi"` |  |
 | postgresql.size | string | `"1Gi"` |  |
 | postgresql.version | string | `"14"` |  |
-| readinessProbe.httpGet.path | string | `"/api/alive"` |  |
-| readinessProbe.httpGet.port | string | `"http"` |  |
+| readinessProbe | object | `{"httpGet":{"path":"/api/alive","port":"http"}}` | Readiness probe |
 | replicaCount | int | `1` |  |
-| resources | object | `{}` |  |
-| securityContext | object | `{}` |  |
-| service.port | int | `80` |  |
-| service.type | string | `"ClusterIP"` |  |
+| resources | object | `{}` | Resources |
+| securityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| service | object | `{"port":80,"type":"ClusterIP"}` | Service |
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.create | bool | `true` |  |
 | serviceAccount.name | string | `""` |  |
-| tolerations | list | `[]` |  |
-| vaultwarden.adminToken.value | string | `"disabled"` |  |
-| vaultwarden.environment | string | `"production"` |  |
-| vaultwarden.extraEnvironmentVars | object | `{}` |  |
-| vaultwarden.rocketPort | int | `8080` |  |
-| verticalAutoscaling.enabled | bool | `false` |  |
-| verticalAutoscaling.updateMode | string | `"Off"` |  |
+| tolerations | list | `[]` | Toleration's |
+| vaultwarden | object | `{"adminToken":{"value":"disabled"},"environment":"production","extraEnvironmentVars":{},"rocketPort":8080}` | Vaultwarden specific configuration |
+| vaultwarden.adminToken.value | string | `"disabled"` | Possible values are 'generated', 'disabled' or any specific value |
+| vaultwarden.extraEnvironmentVars | object | `{}` | Additional environment variables |
+| verticalAutoscaling | object | `{"enabled":false,"updateMode":"Off"}` | VPA configuration |
 
 ----------------------------------------------
 Autogenerated from chart metadata using [helm-docs v1.10.0](https://github.com/norwoodj/helm-docs/releases/v1.10.0)

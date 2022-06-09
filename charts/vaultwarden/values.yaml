@@ -1,4 +1,4 @@
-# Default values for vaultwarden.
+# Default values for Vaultwarden.
 
 replicaCount: 1
 
@@ -7,12 +7,14 @@ image:
   pullPolicy: IfNotPresent
   tag: "1.25.0-alpine"
 
+# -- Vaultwarden specific configuration
 vaultwarden:
   environment: "production"
   rocketPort: 8080
   adminToken:
-    # possible values are 'generated', 'disabled' or any specific value
+    # -- Possible values are 'generated', 'disabled' or any specific value
     value: "disabled"
+  # -- Additional environment variables
   extraEnvironmentVars: {}
 #    DOMAIN: "https://bitwarden.example.com"
 #    SIGNUPS_ALLOWED: false
@@ -20,6 +22,7 @@ vaultwarden:
 #    EXTENDED_LOGGING: true
 #    LOG_LEVEL: "info"
 
+# -- Init-containers
 initContainers: {}
 
 imagePullSecrets: []
@@ -37,19 +40,33 @@ podSecurityContext: {}
 #  runAsGroup: 1000
 #  fsGroup: 1000
 
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+securityContext:
+  capabilities:
+    drop:
+      - ALL
 
+# -- Service
 service:
   type: ClusterIP
   port: 80
 
-## persistent volume
+# -- Ingress
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  # kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: vaultwarden.example.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: vaultwarden-tls
+  #    hosts:
+  #      - vaultwarden.example.com
+
+# -- Persistent volume
 persistence:
   enabled: false
   accessMode: ReadWriteOnce
@@ -58,9 +75,40 @@ persistence:
   # storageClass:
   # existingClaim: "vaultwarden-pvc"
 
+# -- Additional volume mounts
 additionalVolumeMounts: []
+# -- Additional volumes
 additionalVolumes: {}
 
+# -- Liveness probe
+livenessProbe:
+  httpGet:
+    path: /api/alive
+    port: http
+
+# -- Readiness probe
+readinessProbe:
+  httpGet:
+    path: /api/alive
+    port: http
+
+# -- Resources
+resources: {}
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # limits:
+  #   cpu: 200m
+#   memory: 256Mi
+
+# -- Node selectors
+nodeSelector: {}
+# -- Toleration's
+tolerations: []
+# -- Affinities
+affinity: {}
+
+## -- Zalando PostgreSQL database configuration
 postgresql:
   enabled: false
   version: "14"
@@ -75,39 +123,7 @@ postgresql:
       memory: 500Mi
   additionalConfiguration: {}
 
-ingress:
-  enabled: false
-  className: ""
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-  hosts:
-    - host: vaultwarden.example.com
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: vaultwarden-tls
-  #    hosts:
-  #      - vaultwarden.example.com
-
-livenessProbe:
-  httpGet:
-    path: /api/alive
-    port: http
-
-readinessProbe:
-  httpGet:
-    path: /api/alive
-    port: http
-
-resources: {}
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # limits:
-  #   cpu: 200m
-  #   memory: 256Mi
-
+# -- HPA configuration
 horizontalAutoscaling:
   enabled: false
   minReplicas: 1
@@ -115,12 +131,7 @@ horizontalAutoscaling:
   targetCPUUtilizationPercentage: 75
   targetMemoryUtilizationPercentage: 75
 
+# -- VPA configuration
 verticalAutoscaling:
   enabled: false
   updateMode: "Off"
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}

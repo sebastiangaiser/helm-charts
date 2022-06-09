@@ -7,6 +7,6 @@ icon: https://raw.githubusercontent.com/bitwarden/brand/master/icons/icon.svg
 sources:
   - https://github.com/dani-garcia/vaultwarden
   - https://github.com/sebastiangaiser/helm-charts/
-version: 0.7.0
+version: 0.7.1
 maintainers:
   - name: sebastiangaiser
