@@ -11,7 +11,7 @@ vaultwarden:
   environment: "production"
   rocketPort: 8080
   adminToken:
-    # possible values are 'generated', 'disabled' or any specific value
+    # -- possible values are 'generated', 'disabled' or any specific value
     value: "disabled"
   extraEnvironmentVars: {}
 #    DOMAIN: "https://bitwarden.example.com"
@@ -37,13 +37,10 @@ podSecurityContext: {}
 #  runAsGroup: 1000
 #  fsGroup: 1000
 
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+securityContext:
+  capabilities:
+    drop:
+      - ALL
 
 service:
   type: ClusterIP

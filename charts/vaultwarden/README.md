@@ -62,14 +62,14 @@ A Helm chart for deploying Vaultwarden to Kubernetes
 | readinessProbe.httpGet.port | string | `"http"` |  |
 | replicaCount | int | `1` |  |
 | resources | object | `{}` |  |
-| securityContext | object | `{}` |  |
+| securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | service.port | int | `80` |  |
 | service.type | string | `"ClusterIP"` |  |
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.create | bool | `true` |  |
 | serviceAccount.name | string | `""` |  |
 | tolerations | list | `[]` |  |
-| vaultwarden.adminToken.value | string | `"disabled"` |  |
+| vaultwarden.adminToken.value | string | `"disabled"` | possible values are 'generated', 'disabled' or any specific value |
 | vaultwarden.environment | string | `"production"` |  |
 | vaultwarden.extraEnvironmentVars | object | `{}` |  |
 | vaultwarden.rocketPort | int | `8080` |  |
