@@ -135,3 +135,9 @@ horizontalAutoscaling:
 verticalAutoscaling:
   enabled: false
   updateMode: "Off"
+
+# -- PodDisruptionBudget configuration
+podDisruptionBudget:
+  enabled: false
+#  minAvailable: 1
+#  maxUnavailable: 1
