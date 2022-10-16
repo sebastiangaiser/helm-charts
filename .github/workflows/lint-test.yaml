@@ -8,10 +8,9 @@ jobs:
     strategy:
       matrix:
         k8s:
-          - 1.21.12
-          - 1.22.9
-          - 1.23.6
-          # - 1.24.1 kind cluster not getting ready...
+          - 1.23.12
+          - 1.24.6
+          - 1.25.2
     steps:
       - name: Checkout
         uses: actions/checkout@v3
