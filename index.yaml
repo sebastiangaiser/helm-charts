@@ -1,5 +1,18 @@
 apiVersion: v1
 entries:
+  raw:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2023-05-29T14:57:44.824962217Z"
+    description: Copy of incubator/raw - A place for all the Kubernetes resources
+      which don't already have a home.
+    digest: 707c64b5f7871a81ad2faa587755999a862d548a41f580dfffbaa5b5cfdef338
+    maintainers:
+    - name: sebastiangaiser
+    name: raw
+    urls:
+    - https://github.com/sebastiangaiser/helm-charts/releases/download/raw-0.1.0/raw-0.1.0.tgz
+    version: 0.1.0
   vaultwarden:
   - apiVersion: v2
     appVersion: 1.28.1
@@ -271,4 +284,4 @@ entries:
     urls:
     - https://github.com/sebastiangaiser/helm-charts/releases/download/vaultwarden-0.2.0/vaultwarden-0.2.0.tgz
     version: 0.2.0
-generated: "2023-04-10T11:36:26.459895277Z"
+generated: "2023-05-29T14:57:44.825271219Z"
