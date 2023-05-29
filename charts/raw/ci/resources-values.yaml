@@ -1,0 +1,14 @@
+resources:
+  - apiVersion: v1
+    kind: Pod
+    metadata:
+      name: busybox
+      labels:
+        app: busybox
+    spec:
+      containers:
+        - name: busybox
+          image: busybox
+          ports:
+            - containerPort: 80
+          command: ["/bin/sh", "-c", "sleep infinity"]
