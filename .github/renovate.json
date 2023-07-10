@@ -9,6 +9,6 @@
   "timezone": "Europe/Berlin",
   "pre-commit": {
     "enabled": true
-  }
+  },
   "postUpdateOptions": ["helmUpdateSubChartArchives"]
 }
