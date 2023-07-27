@@ -5,7 +5,7 @@ replicaCount: 1
 image:
   repository: vaultwarden/server
   pullPolicy: IfNotPresent
-  tag: "1.29.0-alpine"
+  tag: "1.29.1-alpine"
 
 # -- Vaultwarden specific configuration
 vaultwarden:
