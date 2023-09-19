@@ -5,6 +5,15 @@
     "config:base"
   ],
   "rebaseWhen": "conflicted",
+  "regexManagers": [
+    {
+      "fileMatch": ["(^|/)Chart\\.yaml$"],
+      "matchStrings": [
+        "#\\s?renovate: image=(?<depName>.*?)\\s?appVersion:\\s?\\\"?(?<currentValue>[\\w+\\.\\-]*)"
+      ],
+      "datasourceTemplate": "docker"
+    }
+  ],
   "semanticCommits": "enabled",
   "timezone": "Europe/Berlin",
   "pre-commit": {

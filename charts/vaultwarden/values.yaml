@@ -5,6 +5,7 @@ replicaCount: 1
 image:
   repository: vaultwarden/server
   pullPolicy: IfNotPresent
+  # renovate: image=ghcr.io/dani-garcia/vaultwarden
   tag: "1.29.2-alpine"
 
 # -- Vaultwarden specific configuration
