@@ -1,6 +1,6 @@
 apiVersion: v2
 name: raw
-version: 0.1.0
+version: 0.1.1
 appVersion: 0.1.0
 description: Copy of incubator/raw - A place for all the Kubernetes resources which don't already have a home.
 maintainers:
