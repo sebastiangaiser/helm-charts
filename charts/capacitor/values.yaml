@@ -1,0 +1,92 @@
+## Provide a name in place of kube-prometheus-stack for `app:` labels
+##
+nameOverride: ""
+
+## Override the deployment namespace
+##
+namespaceOverride: ""
+
+## Provide a name to substitute for the full names of resources
+##
+fullnameOverride: ""
+
+replicaCount: 1
+podAnnotations: {}
+imagePullSecrets: []
+
+image:
+  repository: ghcr.io/gimlet-io/capacitor
+  # tag: "v0.4.2"
+  pullPolicy: IfNotPresent
+
+# -- Security context
+securityContext: {}
+
+# -- Liveness probe
+livenessProbe: {}
+
+# -- Readiness probe
+readinessProbe:
+  failureThreshold: 3
+  httpGet:
+    path: /
+    port: 9000
+    scheme: HTTP
+  initialDelaySeconds: 0
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 3
+
+# -- Resources
+resources:
+  requests:
+    cpu: 200m
+    memory: 200Mi
+
+# -- Node selectors
+nodeSelector: {}
+# -- Toleration's
+tolerations: []
+# -- Affinities
+affinity: {}
+
+# -- ServiceAccount
+serviceAccount:
+  create: true
+  # name: ""
+  annotations: {}
+
+# -- Service
+service:
+  annotations: {}
+  labels: {}
+  type: ClusterIP
+  port: 9000
+
+# -- Ingress
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  # kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: capacitor.example.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: capacitor-tls
+  #    hosts:
+  #      - capacitor.example.com
+
+# -- Network Policy
+networkPolicy:
+  enabled: true
+  # -- kubernetes
+  flavor: "kubernetes"
+
+capacitor:
+  readonly: true
+  showSecrets: true
+  showPodLogs: true
+  showEvents: true

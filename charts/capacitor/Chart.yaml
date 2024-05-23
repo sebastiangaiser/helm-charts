@@ -1,0 +1,8 @@
+apiVersion: v2
+name: capacitor
+description: A Helm chart for deploying capacitor, a general purpose UI for FluxCD
+type: application
+version: 0.1.0
+appVersion: v0.4.2
+maintainers:
+  - name: sebastiangaiser

@@ -1,0 +1,15 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "capacitor.fullname" . }}
+  labels:
+    {{- include "capacitor.labels" . | nindent 4 }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "capacitor.serviceAccountName" . }}
+    namespace: {{ template "capacitor.namespace" . }}
+roleRef:
+  kind: ClusterRole
+  name: {{ include "capacitor.fullname" . }}
+  apiGroup: rbac.authorization.k8s.io
