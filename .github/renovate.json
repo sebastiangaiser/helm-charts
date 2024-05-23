@@ -19,5 +19,17 @@
   "pre-commit": {
     "enabled": true
   },
-  "postUpdateOptions": ["helmUpdateSubChartArchives"]
+  "postUpdateOptions": ["helmUpdateSubChartArchives"],
+  "packageRules": [
+    {
+      "description": "Bump helm chart versions by a patch when updating values files. Digests, pins, rollbacks, replacements and pinDigest updates are deliberately ignored since in our use case, these need a manual decision about the version bump for the chart. This can be removed when https://github.com/renovatebot/renovate/issues/8231 is implemented and enabled.",
+      "matchManagers": ["helm-values"],
+      "postUpgradeTasks": {
+        "commands": [
+          "bash scripts/bump-chart-version.sh '{{{parentDir}}}' '{{{updateType}}}'"
+        ],
+        "fileFilters": ["**/Chart.yaml"]
+      }
+    }
+  ]
 }
