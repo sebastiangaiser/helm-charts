@@ -1,0 +1,13 @@
+---
+ingress:
+  enabled: true
+  className: ingress-nginx
+  hosts:
+    - host: gitops.example.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - hosts:
+        - gitops.example.com
+      secretName: gitops-tls
