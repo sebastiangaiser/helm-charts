@@ -2,12 +2,12 @@ apiVersion: v2
 name: vaultwarden
 description: A Helm chart for deploying Vaultwarden to Kubernetes
 # renovate: image=ghcr.io/dani-garcia/vaultwarden
-appVersion: "1.30.5"
+appVersion: "1.31.0"
 type: application
 icon: https://raw.githubusercontent.com/bitwarden/brand/master/icons/icon.svg
 sources:
   - https://github.com/dani-garcia/vaultwarden
   - https://github.com/sebastiangaiser/helm-charts/
-version: 0.8.11
+version: 0.8.12
 maintainers:
   - name: sebastiangaiser
