@@ -32,6 +32,7 @@
       }
     }
   ],
+  "allowedPostUpgradeCommands": ["^.*",],
   "customManagers": [
     {
       "description": "Upgrade helm-docs version in a GitHub workflow",
