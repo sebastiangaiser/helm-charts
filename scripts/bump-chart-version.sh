@@ -3,7 +3,9 @@
 set -euo pipefail
 
 parent_dir="$1"
-update_type="$2"
+is_major="$2"
+is_minor="$3"
+is_patch="$4"
 
 version=$(grep "^version:" "charts/${parent_dir}/Chart.yaml" | awk '{print $2}')
 if [[ ! $version ]]; then
@@ -15,14 +17,21 @@ major=$(echo "$version" | cut -d. -f1)
 minor=$(echo "$version" | cut -d. -f2)
 patch=$(echo "$version" | cut -d. -f3)
 
-if [[ "$update_type" =~ (major|replacement) ]]; then
+# Bump major version
+if [[ "$is_major" = 'true' ]]; then
   major=$(( major + 1 ))
   minor=0
   patch=0
-elif [[ "$update_type" =~ 'minor' ]]; then
+fi
+
+# Bump minor version
+if [[ "$is_minor" = 'true' ]]; then
   minor=$(( minor + 1 ))
   patch=0
-else
+fi
+
+# Bump patch version
+if [[ "$is_patch" = 'true' ]]; then
   patch=$(( patch + 1 ))
 fi
 
