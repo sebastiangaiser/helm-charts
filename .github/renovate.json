@@ -26,9 +26,10 @@
       "matchManagers": ["helm-values"],
       "postUpgradeTasks": {
         "commands": [
-          "bash scripts/bump-chart-version.sh '{{{parentDir}}}' '{{{updateType}}}'"
+          "bash scripts/bump-chart-version.sh '{{{parentDir}}}' '{{{isMajor}}}' '{{{isMinor}}}' '{{{isPatch}}}'"
         ],
-        "fileFilters": ["**/Chart.yaml"]
+        "fileFilters": ["**/Chart.yaml"],
+        "executionMode": "branch"
       }
     }
   ],
