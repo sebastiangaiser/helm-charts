@@ -40,6 +40,22 @@ entries:
     version: 0.1.0
   vaultwarden:
   - apiVersion: v2
+    appVersion: 1.31.0
+    created: "2024-07-13T12:12:44.969199469Z"
+    description: A Helm chart for deploying Vaultwarden to Kubernetes
+    digest: 88ce76506c96bdaac555954f08ae9c81ba1d363e21b5721c837c350f8a33dbc8
+    icon: https://raw.githubusercontent.com/bitwarden/brand/master/icons/icon.svg
+    maintainers:
+    - name: sebastiangaiser
+    name: vaultwarden
+    sources:
+    - https://github.com/dani-garcia/vaultwarden
+    - https://github.com/sebastiangaiser/helm-charts/
+    type: application
+    urls:
+    - https://github.com/sebastiangaiser/helm-charts/releases/download/vaultwarden-0.8.12/vaultwarden-0.8.12.tgz
+    version: 0.8.12
+  - apiVersion: v2
     appVersion: 1.30.5
     created: "2024-03-30T12:42:58.232510981Z"
     description: A Helm chart for deploying Vaultwarden to Kubernetes
@@ -389,4 +405,4 @@ entries:
     urls:
     - https://github.com/sebastiangaiser/helm-charts/releases/download/vaultwarden-0.2.0/vaultwarden-0.2.0.tgz
     version: 0.2.0
-generated: "2024-05-23T19:09:52.708396214Z"
+generated: "2024-07-13T12:12:44.969458384Z"
