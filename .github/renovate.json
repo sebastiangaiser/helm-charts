@@ -32,7 +32,7 @@
       }
     }
   ],
-  "allowedPostUpgradeCommands": ["^.*",],
+  "allowedPostUpgradeCommands": ["bash scripts/bump-chart-version.sh '{{{parentDir}}}' '{{{updateType}}}'"],
   "customManagers": [
     {
       "description": "Upgrade helm-docs version in a GitHub workflow",
