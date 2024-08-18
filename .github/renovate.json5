@@ -5,19 +5,19 @@
     "config:recommended"
   ],
   rebaseWhen: "conflicted",
-  "regexManagers": [
+  regexManagers: [
     {
-      "fileMatch": ["(^|/)Chart\\.yaml$"],
-      "matchStrings": [
+      fileMatch: ["(^|/)Chart\\.yaml$"],
+      matchStrings: [
         "#\\s?renovate: image=(?<depName>.*?)\\s?appVersion:\\s?\\\"?(?<currentValue>[\\w+\\.\\-]*)"
       ],
-      "datasourceTemplate": "docker"
+      datasourceTemplate: "docker"
     }
   ],
   semanticCommits: "enabled",
   timezone: "Europe/Berlin",
   "pre-commit": {
-    "enabled": true
+    enabled: true
   },
   postUpdateOptions: ["helmUpdateSubChartArchives"],
   customManagers: [
