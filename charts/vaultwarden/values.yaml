@@ -6,7 +6,7 @@ image:
   repository: vaultwarden/server
   pullPolicy: IfNotPresent
   # renovate: image=ghcr.io/dani-garcia/vaultwarden
-  tag: "1.31.0-alpine"
+  tag: "1.32.0-alpine"
 
 # -- Vaultwarden specific configuration
 vaultwarden:
