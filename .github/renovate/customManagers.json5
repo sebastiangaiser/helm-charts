@@ -1,0 +1,12 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  customManagers: [
+    {
+      description: "Upgrade helm-docs version in a GitHub workflow",
+      fileMatch: ["(^workflow-templates|\\.github/workflows)/[^/]+\\.ya?ml$"],
+      matchStrings: [
+        "# renovate: datasource=(?<datasource>.*?)\\sdepName=(?<depName>.*?)\\s*run: go install github.com/norwoodj/helm-docs/cmd/helm-docs@(?<currentValue>.*)"
+      ]
+    }
+  ]
+}
