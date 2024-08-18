@@ -1,4 +1,5 @@
 {
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
   dependencyDashboardTitle: "Renovate Dashboard 🤖",
   commitBody: "Signed-off-by: Sebastian Gaiser <sebastiangaiser@users.noreply.github.com>",
   extends: [
