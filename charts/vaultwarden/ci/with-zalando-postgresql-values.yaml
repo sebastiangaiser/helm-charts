@@ -1,2 +1,2 @@
-postgresql:
+zalandoPostgresql:
   enabled: false  # currently failing

@@ -110,9 +110,9 @@ tolerations: []
 affinity: {}
 
 ## -- Zalando PostgreSQL database configuration
-postgresql:
+zalandoPostgresql:
   enabled: false
-  version: "14"
+  version: "16"
   instances: 1
   size: 1Gi
   resources:
