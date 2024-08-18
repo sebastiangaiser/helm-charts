@@ -1,0 +1,26 @@
+{{- if .Values.zalandoPostgresql.enabled }}
+apiVersion: "acid.zalan.do/v1"
+kind: "postgresql"
+metadata:
+  name: {{ .Values.zalandoPostgresql.teamId | default "acid" }}-{{ include "vaultwarden.fullname" . }}
+  labels:
+    team: {{ .Values.zalandoPostgresql.teamId | default "acid" }}
+      {{- include "vaultwarden.labels" . | nindent 4 }}
+spec:
+  teamId: {{ .Values.zalandoPostgresql.teamId | default "acid" }}
+  postgresql:
+    version: {{ .Values.zalandoPostgresql.version | quote }}
+  numberOfInstances: {{ .Values.zalandoPostgresql.instances }}
+  volume:
+    size: {{ .Values.zalandoPostgresql.size | quote }}
+  users:
+    {{ include "vaultwarden.fullname" . }}: []
+  databases:
+    {{ include "vaultwarden.fullname" . }}: "{{ include "vaultwarden.fullname" . }}" #dbname: owner
+  allowedSourceRanges: []
+  resources:
+    {{- toYaml .Values.zalandoPostgresql.resources | nindent 4 }}
+  {{- with .Values.zalandoPostgresql.additionalConfiguration }}
+  {{- toYaml . | nindent 2 }}
+  {{- end }}
+{{- end }}
