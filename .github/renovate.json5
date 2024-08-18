@@ -1,10 +1,10 @@
 {
-  "commitBody": "Signed-off-by: Sebastian Gaiser <sebastiangaiser@users.noreply.github.com>",
-  "enabled": true,
-  "extends": [
+  dependencyDashboardTitle: "Renovate Dashboard 🤖",
+  commitBody: "Signed-off-by: Sebastian Gaiser <sebastiangaiser@users.noreply.github.com>",
+  extends: [
     "config:recommended"
   ],
-  "rebaseWhen": "conflicted",
+  rebaseWhen: "conflicted",
   "regexManagers": [
     {
       "fileMatch": ["(^|/)Chart\\.yaml$"],
@@ -14,17 +14,17 @@
       "datasourceTemplate": "docker"
     }
   ],
-  "semanticCommits": "enabled",
-  "timezone": "Europe/Berlin",
+  semanticCommits: "enabled",
+  timezone: "Europe/Berlin",
   "pre-commit": {
     "enabled": true
   },
-  "postUpdateOptions": ["helmUpdateSubChartArchives"],
-  "customManagers": [
+  postUpdateOptions: ["helmUpdateSubChartArchives"],
+  customManagers: [
     {
-      "description": "Upgrade helm-docs version in a GitHub workflow",
-      "fileMatch": ["(^workflow-templates|\\.github/workflows)/[^/]+\\.ya?ml$"],
-      "matchStrings": [
+      description: "Upgrade helm-docs version in a GitHub workflow",
+      fileMatch: ["(^workflow-templates|\\.github/workflows)/[^/]+\\.ya?ml$"],
+      matchStrings: [
         "# renovate: datasource=(?<datasource>.*?)\\sdepName=(?<depName>.*?)\\s*run: go install github.com/norwoodj/helm-docs/cmd/helm-docs@(?<currentValue>.*)"
       ]
     }
