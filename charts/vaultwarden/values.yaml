@@ -3,10 +3,9 @@
 replicaCount: 1
 
 image:
-  repository: vaultwarden/server
+  repository: ghcr.io/dani-garcia/vaultwarden
   pullPolicy: IfNotPresent
-  # renovate: image=ghcr.io/dani-garcia/vaultwarden
-  tag: "1.32.0-alpine"
+  # tag: "1.32.0-alpine"
 
 # -- Vaultwarden specific configuration
 vaultwarden:
@@ -17,11 +16,11 @@ vaultwarden:
     value: "disabled"
   # -- Additional environment variables
   extraEnvironmentVars: {}
-#    DOMAIN: "https://bitwarden.example.com"
-#    SIGNUPS_ALLOWED: false
-#    SIGNUPS_VERIFY: false
-#    EXTENDED_LOGGING: true
-#    LOG_LEVEL: "info"
+    # DOMAIN: "https://bitwarden.example.com"
+    # SIGNUPS_ALLOWED: false
+    # SIGNUPS_VERIFY: false
+    # EXTENDED_LOGGING: true
+    # LOG_LEVEL: "info"
 
 # -- Init-containers
 initContainers: {}
@@ -37,9 +36,9 @@ serviceAccount:
 
 podAnnotations: {}
 podSecurityContext: {}
-#  runAsUser: 1000
-#  runAsGroup: 1000
-#  fsGroup: 1000
+  # runAsUser: 1000
+  # runAsGroup: 1000
+  # fsGroup: 1000
 
 securityContext:
   capabilities:
@@ -63,17 +62,17 @@ ingress:
         - path: /
           pathType: ImplementationSpecific
   tls: []
-  #  - secretName: vaultwarden-tls
-  #    hosts:
-  #      - vaultwarden.example.com
+    # - secretName: vaultwarden-tls
+    #   hosts:
+    #     - vaultwarden.example.com
 
 # -- Persistent volume
 persistence:
   enabled: false
   accessMode: ReadWriteOnce
   size: 1Gi
-  # subPath:
-  # storageClass:
+  # subPath: ""
+  # storageClass: ""
   # existingClaim: "vaultwarden-pvc"
 
 # -- Additional volume mounts
@@ -100,7 +99,7 @@ resources: {}
   #   memory: 128Mi
   # limits:
   #   cpu: 200m
-#   memory: 256Mi
+  #   memory: 256Mi
 
 # -- Node selectors
 nodeSelector: {}
@@ -140,5 +139,5 @@ verticalAutoscaling:
 # -- PodDisruptionBudget configuration
 podDisruptionBudget:
   enabled: false
-#  minAvailable: 1
-#  maxUnavailable: 1
+  # minAvailable: 1
+  # maxUnavailable: 1
