@@ -34,6 +34,9 @@ serviceAccount:
   annotations: {}
   name: ""
 
+deploymentStrategy:
+  type: Recreate
+
 podAnnotations: {}
 podSecurityContext: {}
   # runAsUser: 1000
