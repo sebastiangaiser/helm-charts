@@ -8,6 +8,10 @@ spec:
   {{- if not .Values.horizontalAutoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
+  {{- with .Values.deploymentStrategy }}
+  strategy:
+    {{- toYaml . | trim | nindent 4 }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "vaultwarden.selectorLabels" . | nindent 6 }}
