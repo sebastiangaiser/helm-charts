@@ -2,6 +2,18 @@ apiVersion: v1
 entries:
   capacitor:
   - apiVersion: v2
+    appVersion: v0.4.3
+    created: "2024-10-01T19:16:21.535248439Z"
+    description: A Helm chart for deploying capacitor, a general purpose UI for FluxCD
+    digest: cb8ed01588f87b81d9736822e305f4972a85b67b05aaf647c2c0ec4fc90d6a91
+    maintainers:
+    - name: sebastiangaiser
+    name: capacitor
+    type: application
+    urls:
+    - https://github.com/sebastiangaiser/helm-charts/releases/download/capacitor-0.1.1/capacitor-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
     appVersion: v0.4.2
     created: "2024-05-23T19:09:52.708306447Z"
     description: A Helm chart for deploying capacitor, a general purpose UI for FluxCD
@@ -469,4 +481,4 @@ entries:
     urls:
     - https://github.com/sebastiangaiser/helm-charts/releases/download/vaultwarden-0.2.0/vaultwarden-0.2.0.tgz
     version: 0.2.0
-generated: "2024-09-09T19:04:44.943513918Z"
+generated: "2024-10-01T19:16:21.535321525Z"
