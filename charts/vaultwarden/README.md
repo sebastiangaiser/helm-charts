@@ -1,6 +1,6 @@
 # vaultwarden
 
-![Version: 0.11.4](https://img.shields.io/badge/Version-0.11.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.32.4](https://img.shields.io/badge/AppVersion-1.32.4-informational?style=flat-square)
+![Version: 0.11.5](https://img.shields.io/badge/Version-0.11.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.32.5](https://img.shields.io/badge/AppVersion-1.32.5-informational?style=flat-square)
 
 A Helm chart for deploying Vaultwarden to Kubernetes
 
