@@ -1,28 +1,29 @@
 {
-  $schema: "https://docs.renovatebot.com/renovate-schema.json",
-  dependencyDashboardTitle: "Renovate Dashboard 🤖",
-  commitBody: "Signed-off-by: Sebastian Gaiser <sebastiangaiser@users.noreply.github.com>",
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  dependencyDashboardTitle: 'Renovate Dashboard 🤖',
+  commitBody: 'Signed-off-by: Sebastian Gaiser <sebastiangaiser@users.noreply.github.com>',
   extends: [
-    "config:recommended",
-    "github>sebastiangaiser/helm-charts//.github/renovate/customManagers.json5"
+    'config:recommended',
+    'github>sebastiangaiser/helm-charts//.github/renovate/customManagers.json5',
   ],
-  rebaseWhen: "conflicted",
-  regexManagers: [
+  rebaseWhen: 'conflicted',
+  customManagers: [
     {
+      customType: 'regex',
       fileMatch: [
-        "(^|/)Chart\\.yaml$",
-        "(^|/)values\\.yaml$"
+        '(^|/)Chart\\.yaml$',
+        '(^|/)values\\.yaml$',
       ],
       matchStrings: [
-        "#\\s?renovate: image=(?<depName>.*?)\\s?appVersion:\\s?\\\"?(?<currentValue>[\\w+\\.\\-]*)"
+        '#\\s?renovate: image=(?<depName>.*?)\\s?appVersion:\\s?\\"?(?<currentValue>[\\w+\\.\\-]*)',
       ],
-      datasourceTemplate: "docker"
-    }
+      datasourceTemplate: 'docker',
+    },
   ],
-  semanticCommits: "enabled",
-  timezone: "Europe/Berlin",
-  "pre-commit": {
-    enabled: true
+  semanticCommits: 'enabled',
+  timezone: 'Europe/Berlin',
+  'pre-commit': {
+    enabled: true,
   },
-  bumpVersion: "patch"
+  bumpVersion: 'patch',
 }
