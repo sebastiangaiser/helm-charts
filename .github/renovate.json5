@@ -9,7 +9,10 @@
   rebaseWhen: "conflicted",
   regexManagers: [
     {
-      fileMatch: ["(^|/)Chart\\.yaml$", "(^|/)values\\.yaml$"],
+      fileMatch: [
+        "(^|/)Chart\\.yaml$",
+        "(^|/)values\\.yaml$"
+      ],
       matchStrings: [
         "#\\s?renovate: image=(?<depName>.*?)\\s?appVersion:\\s?\\\"?(?<currentValue>[\\w+\\.\\-]*)"
       ],
@@ -21,22 +24,5 @@
   "pre-commit": {
     enabled: true
   },
-  postUpdateOptions: ["helmUpdateSubChartArchives"],
-  packageRules: [
-    {
-      description: "Bump helm chart versions by a patch. This can be removed when https://github.com/renovatebot/renovate/issues/8231 is implemented and enabled.",
-      matchFileNames: [
-        "charts/**"
-      ],
-      postUpgradeTasks: {
-        commands: [
-          "bash scripts/bump-chart-version.sh '{{{parentDir}}}'"
-        ],
-        fileFilters: [
-          "charts/**"
-        ],
-        executionMode: "branch"
-      }
-    }
-  ]
+  bumpVersion: "patch"
 }
