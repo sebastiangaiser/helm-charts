@@ -4,6 +4,7 @@
   commitBody: 'Signed-off-by: Sebastian Gaiser <sebastiangaiser@users.noreply.github.com>',
   extends: [
     'config:recommended',
+    'customManagers:helmChartYamlAppVersions',
     'github>sebastiangaiser/helm-charts//.github/renovate/customManagers.json5',
   ],
   rebaseWhen: 'conflicted',
