@@ -1,4 +1,5 @@
-{{- if .Values.verticalAutoscaling.enabled }}
+{{- if .Values.verticalAutoscaling.enabled -}}
+---
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
 metadata:
@@ -12,4 +13,4 @@ spec:
     name: {{ include "vaultwarden.fullname" . }}
   updatePolicy:
     updateMode: {{ .Values.verticalAutoscaling.updateMode | quote }}
-{{- end }}
+{{- end -}}

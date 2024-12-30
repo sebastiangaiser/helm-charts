@@ -1,4 +1,5 @@
-{{- if .Values.podDisruptionBudget.enabled }}
+{{- if .Values.podDisruptionBudget.enabled -}}
+---
 apiVersion: {{ include "vaultwarden.podDisruptionBudget.apiVersion" . }}
 kind: PodDisruptionBudget
 metadata:
@@ -15,4 +16,4 @@ spec:
   selector:
     matchLabels:
       {{- include "vaultwarden.selectorLabels" . | nindent 6 }}
-{{- end }}
+{{- end -}}
