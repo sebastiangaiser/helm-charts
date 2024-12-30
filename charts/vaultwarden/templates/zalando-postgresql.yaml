@@ -1,11 +1,12 @@
-{{- if .Values.zalandoPostgresql.enabled }}
-apiVersion: "acid.zalan.do/v1"
-kind: "postgresql"
+{{- if .Values.zalandoPostgresql.enabled -}}
+---
+apiVersion: acid.zalan.do/v1
+kind: postgresql
 metadata:
   name: {{ .Values.zalandoPostgresql.teamId | default "acid" }}-{{ include "vaultwarden.fullname" . }}
   labels:
     team: {{ .Values.zalandoPostgresql.teamId | default "acid" }}
-      {{- include "vaultwarden.labels" . | nindent 4 }}
+    {{- include "vaultwarden.labels" . | nindent 4 }}
 spec:
   teamId: {{ .Values.zalandoPostgresql.teamId | default "acid" }}
   postgresql:
@@ -23,4 +24,4 @@ spec:
   {{- with .Values.zalandoPostgresql.additionalConfiguration }}
   {{- toYaml . | nindent 2 }}
   {{- end }}
-{{- end }}
+{{- end -}}
