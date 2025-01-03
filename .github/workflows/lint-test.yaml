@@ -8,10 +8,11 @@ jobs:
     strategy:
       matrix:
         k8s:
-          - 1.28.13
-          - 1.29.8
-          - 1.30.4
-          - 1.31.0
+          - v1.29.12
+          - v1.30.8
+          - v1.31.4
+          # # renovate: image=docker.io/kindest/node
+          - v1.32.0
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -44,7 +45,7 @@ jobs:
       - name: Create kind cluster
         uses: helm/kind-action@v1.12.0
         with:
-          node_image: "kindest/node:v${{ matrix.k8s }}"
+          node_image: "kindest/node:${{ matrix.k8s }}"
         if: steps.list-changed.outputs.changed == 'true'
 
       - name: Apply Gateway API CRDs
