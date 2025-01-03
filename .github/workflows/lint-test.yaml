@@ -47,6 +47,11 @@ jobs:
           node_image: "kindest/node:v${{ matrix.k8s }}"
         if: steps.list-changed.outputs.changed == 'true'
 
+      - name: Apply Gateway API CRDs
+        run: |
+          kubectl apply -k https://github.com/kubernetes-sigs/gateway-api/config/crd
+        if: steps.list-changed.outputs.changed == 'true'
+
       - name: Install Zalando's postgres-operator
         run: |
           helm install postgres-operator postgres-operator-charts/postgres-operator
