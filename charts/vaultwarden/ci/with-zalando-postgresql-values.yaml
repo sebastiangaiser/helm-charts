@@ -1,2 +1,2 @@
 zalandoPostgresql:
-  enabled: false  # currently failing
+  enabled: true
