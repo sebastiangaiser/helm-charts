@@ -89,6 +89,21 @@ jobs:
           helm install prometheus-operator-crds oci://ghcr.io/prometheus-community/charts/prometheus-operator-crds
         if: steps.list-changed.outputs.changed == 'true'
 
+      - name: Install Zalando Postgres Operator
+        run: |
+          # renovate: helm=postgres-operator registry=https://opensource.zalando.com/postgres-operator/charts/postgres-operator
+          POSTGRES_OPERATOR_VERSION=2.0.3
+          # configTarget=ConfigMap keeps the OperatorConfiguration custom resource out of the
+          # release, which would otherwise race the CRD the same release has just created
+          helm install postgres-operator postgres-operator \
+            --repo https://opensource.zalando.com/postgres-operator/charts/postgres-operator \
+            --version "${POSTGRES_OPERATOR_VERSION}" \
+            --set configTarget=ConfigMap \
+            --namespace zalando-pg \
+            --create-namespace \
+            --wait
+        if: steps.list-changed.outputs.changed == 'true'
+
       - name: Run chart-testing (install)
         run: ct install --config .github/linters/ct.yaml
 

@@ -9,4 +9,4 @@ icon: https://raw.githubusercontent.com/bitwarden/brand/master/icons/icon.svg
 sources:
   - https://github.com/dani-garcia/vaultwarden
   - https://github.com/sebastiangaiser/helm-charts/
-version: 1.0.0
+version: 1.0.1
