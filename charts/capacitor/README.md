@@ -1,6 +1,6 @@
 # capacitor
 
-![Version: 0.1.5](https://img.shields.io/badge/Version-0.1.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.4.8](https://img.shields.io/badge/AppVersion-v0.4.8-informational?style=flat-square)
+![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.4.8](https://img.shields.io/badge/AppVersion-v0.4.8-informational?style=flat-square)
 
 A Helm chart for deploying capacitor, a general purpose UI for FluxCD
 
@@ -29,6 +29,7 @@ Check the values how to configure the flavor.
 | networkPolicy.flavor | string | `"kubernetes"` | kubernetes |
 | nodeSelector | object | `{}` | Node selectors |
 | podAnnotations | object | `{}` |  |
+| podSecurityContext | object | `{}` | Pod security context |
 | readinessProbe | object | `{"failureThreshold":3,"httpGet":{"path":"/","port":9000,"scheme":"HTTP"},"initialDelaySeconds":0,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":3}` | Readiness probe |
 | replicaCount | int | `1` |  |
 | resources | object | `{"requests":{"cpu":"200m","memory":"200Mi"}}` | Resources |

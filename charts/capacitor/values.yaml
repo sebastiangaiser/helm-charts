@@ -22,6 +22,9 @@ image:
 # -- Security context
 securityContext: {}
 
+# -- Pod security context
+podSecurityContext: {}
+
 # -- Liveness probe
 livenessProbe: {}
 
