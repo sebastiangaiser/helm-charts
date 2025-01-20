@@ -55,7 +55,7 @@ jobs:
 
       - name: Install Zalando's postgres-operator
         run: |
-          helm install postgres-operator postgres-operator-charts/postgres-operator
+          helm install --atomic --repo https://opensource.zalando.com/postgres-operator/charts/postgres-operator postgres-operator postgres-operator
         if: steps.list-changed.outputs.changed == 'true'
 
       - name: Install prometheus-operator-crds
