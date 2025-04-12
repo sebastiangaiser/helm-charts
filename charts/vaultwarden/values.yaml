@@ -111,6 +111,14 @@ tolerations: []
 # -- Affinities
 affinity: {}
 
+## -- CNPG database configuration
+cnpg:
+  enabled: false
+  backup: {}
+  version: "16"
+  instances: "1"
+  size: 1Gi
+
 ## -- Zalando PostgreSQL database configuration
 zalandoPostgresql:
   enabled: false

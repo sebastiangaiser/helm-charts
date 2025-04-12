@@ -58,6 +58,11 @@ jobs:
           helm install postgres-operator postgres-operator-charts/postgres-operator
         if: steps.list-changed.outputs.changed == 'true'
 
+      - name: Install CNPG
+        run: |
+          helm install --atomic --namespace cnpg-system --create-namespace --repo https://cloudnative-pg.github.io/charts cnpg cloudnative-pg
+        if: steps.list-changed.outputs.changed == 'true'
+
       - name: Install prometheus-operator-crds
         run: |
           helm install --repo https://prometheus-community.github.io/helm-charts prometheus-operator-crds prometheus-operator-crds
