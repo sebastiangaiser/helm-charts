@@ -111,6 +111,10 @@ tolerations: []
 # -- Affinities
 affinity: {}
 
+## -- CNPG database configuration
+cnpg:
+  enabled: false
+
 ## -- Zalando PostgreSQL database configuration
 zalandoPostgresql:
   enabled: false
