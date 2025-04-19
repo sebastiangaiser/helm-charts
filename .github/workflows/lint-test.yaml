@@ -55,7 +55,8 @@ jobs:
 
       - name: Install Zalando's postgres-operator
         run: |
-          helm install postgres-operator postgres-operator-charts/postgres-operator
+          helm install --atomic --namespace zalando-pg --create-namespace --repo https://opensource.zalando.com/postgres-operator/charts/postgres-operator postgres-operator postgres-operator
+          kubectl --namespace=zalando-pg get pods -l "app.kubernetes.io/name=postgres-operator"
         if: steps.list-changed.outputs.changed == 'true'
 
       - name: Install CNPG
