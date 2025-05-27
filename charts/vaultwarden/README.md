@@ -1,6 +1,6 @@
 # vaultwarden
 
-![Version: 0.11.11](https://img.shields.io/badge/Version-0.11.11-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.33.2](https://img.shields.io/badge/AppVersion-1.33.2-informational?style=flat-square)
+![Version: 0.11.12](https://img.shields.io/badge/Version-0.11.12-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.34.1](https://img.shields.io/badge/AppVersion-1.34.1-informational?style=flat-square)
 
 A Helm chart for deploying Vaultwarden to Kubernetes
 
@@ -22,6 +22,7 @@ A Helm chart for deploying Vaultwarden to Kubernetes
 | additionalVolumeMounts | list | `[]` | Additional volume mounts |
 | additionalVolumes | object | `{}` | Additional volumes |
 | affinity | object | `{}` | Affinities |
+| cnpg.enabled | bool | `false` |  |
 | deploymentStrategy.type | string | `"Recreate"` |  |
 | fullnameOverride | string | `""` |  |
 | horizontalAutoscaling | object | `{"enabled":false,"maxReplicas":3,"minReplicas":1,"targetCPUUtilizationPercentage":75,"targetMemoryUtilizationPercentage":75}` | HPA configuration |
