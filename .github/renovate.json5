@@ -11,9 +11,9 @@
   customManagers: [
     {
       customType: 'regex',
-      fileMatch: [
-        '(^|/)Chart\\.yaml$',
-        '(^|/)values\\.yaml$',
+      managerFilePatterns: [
+        '/(^|/)Chart\\.yaml$/',
+        '/(^|/)values\\.yaml$/',
       ],
       matchStrings: [
         '#\\s?renovate: image=(?<depName>.*?)\\s?appVersion:\\s?\\"?(?<currentValue>[\\w+\\.\\-]*)',
