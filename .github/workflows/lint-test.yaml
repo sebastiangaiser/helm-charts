@@ -8,11 +8,11 @@ jobs:
     strategy:
       matrix:
         k8s:
-          - v1.29.12
-          - v1.30.8
-          - v1.31.4
+          - v1.30.13
+          - v1.31.9
+          - v1.32.5
           # # renovate: image=docker.io/kindest/node
-          - v1.32.0
+          - v1.33.2
     steps:
       - name: Checkout
         uses: actions/checkout@v4
