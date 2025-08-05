@@ -1,6 +1,6 @@
 # vaultwarden
 
-![Version: 0.11.14](https://img.shields.io/badge/Version-0.11.14-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.34.3](https://img.shields.io/badge/AppVersion-1.34.3-informational?style=flat-square)
+![Version: 0.12.0](https://img.shields.io/badge/Version-0.12.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.34.3](https://img.shields.io/badge/AppVersion-1.34.3-informational?style=flat-square)
 
 A Helm chart for deploying Vaultwarden to Kubernetes
 
@@ -47,8 +47,9 @@ A Helm chart for deploying Vaultwarden to Kubernetes
 | serviceAccount.create | bool | `true` |  |
 | serviceAccount.name | string | `""` |  |
 | tolerations | list | `[]` | Toleration's |
-| vaultwarden | object | `{"adminToken":{"value":"disabled"},"environment":"production","extraEnvironmentVars":{},"rocketPort":8080}` | Vaultwarden specific configuration |
+| vaultwarden | object | `{"adminToken":{"value":"disabled"},"envFromSecrets":[],"environment":"production","extraEnvironmentVars":{},"rocketPort":8080}` | Vaultwarden specific configuration |
 | vaultwarden.adminToken.value | string | `"disabled"` | Possible values are 'generated', 'disabled' or any specific value |
+| vaultwarden.envFromSecrets | list | `[]` | Additional environment variables from secrets |
 | vaultwarden.extraEnvironmentVars | object | `{}` | Additional environment variables |
 | verticalAutoscaling | object | `{"enabled":false,"updateMode":"Off"}` | VPA configuration |
 | zalandoPostgresql.additionalConfiguration | object | `{}` |  |
