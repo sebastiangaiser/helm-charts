@@ -21,6 +21,9 @@ vaultwarden:
     # SIGNUPS_VERIFY: false
     # EXTENDED_LOGGING: true
     # LOG_LEVEL: "info"
+  # -- Additional environment variables from secrets
+  envFromSecrets: []
+    # - name: my-vaultwarden-envs
 
 # -- Init-containers
 initContainers: {}
