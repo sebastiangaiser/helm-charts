@@ -1,0 +1,21 @@
+{{- if and .Values.networkPolicy.enabled (eq .Values.networkPolicy.flavor "cilium") -}}
+---
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: {{ include "capacitor.fullname" . }}-ingress
+  namespace: {{ template "capacitor.namespace" . }}
+  labels:
+    {{- include "capacitor.labels" . | nindent 4 }}
+spec:
+  endpointSelector:
+    matchLabels:
+      {{- include "capacitor.selectorLabels" . | nindent 6 }}
+  ingress:
+    - fromEntities:
+        - ingress
+      toPorts:
+        - ports:
+            - port: {{ .Values.service.port }}
+              protocol: TCP
+{{- end -}}
