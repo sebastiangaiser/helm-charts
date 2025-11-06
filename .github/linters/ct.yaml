@@ -6,3 +6,5 @@ chart-dirs:
 chart-repos:
   - postgres-operator-charts=https://opensource.zalando.com/postgres-operator/charts/postgres-operator
 helm-extra-args: --timeout 600s
+use-helmignore: true
+validate-maintainers: false

@@ -2,8 +2,6 @@ apiVersion: v2
 name: capacitor
 description: A Helm chart for deploying capacitor, a general purpose UI for FluxCD
 type: application
-version: 0.2.1
-# renovate: image=ghcr.io/gimlet-io/capacitor
+version: 0.2.2
+# renovate: github=gimlet-io/capacitor
 appVersion: v0.4.8
-maintainers:
-  - name: sebastiangaiser
