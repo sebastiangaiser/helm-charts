@@ -4,27 +4,12 @@
   commitBody: 'Signed-off-by: Sebastian Gaiser <sebastiangaiser@users.noreply.github.com>',
   extends: [
     'config:recommended',
-    'customManagers:helmChartYamlAppVersions',
+    'github>prometheus-community/helm-charts//renovate.json',
     'github>sebastiangaiser/helm-charts//.github/renovate/customManagers.json5',
-  ],
-  rebaseWhen: 'conflicted',
-  customManagers: [
-    {
-      customType: 'regex',
-      managerFilePatterns: [
-        '/(^|/)Chart\\.yaml$/',
-        '/(^|/)values\\.yaml$/',
-      ],
-      matchStrings: [
-        '#\\s?renovate: image=(?<depName>.*?)\\s?appVersion:\\s?\\"?(?<currentValue>[\\w+\\.\\-]*)',
-      ],
-      datasourceTemplate: 'docker',
-    },
   ],
   semanticCommits: 'enabled',
   timezone: 'Europe/Berlin',
   'pre-commit': {
     enabled: true,
   },
-  bumpVersion: 'patch',
 }
