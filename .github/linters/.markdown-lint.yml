@@ -1,0 +1,7 @@
+MD013:
+  # https://github.com/DavidAnson/markdownlint/blob/main/doc/md013.md
+  line_length: 600
+# helm-docs generates a wild mixture of style tight for dashes and compact for keys and values...
+MD060: false
+  # https://github.com/DavidAnson/markdownlint/blob/main/doc/md060.md
+  # style: tight # compact
