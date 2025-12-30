@@ -12,4 +12,7 @@
   'pre-commit': {
     enabled: true,
   },
+  ignorePaths: [
+    'charts/capacitor/**',
+  ]
 }
