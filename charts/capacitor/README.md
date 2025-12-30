@@ -1,5 +1,7 @@
 # capacitor
 
+Deprecated: This chart will not receive any further updates!
+
 A Helm chart for deploying capacitor, a general purpose UI for FluxCD
 
 ## Network policies
