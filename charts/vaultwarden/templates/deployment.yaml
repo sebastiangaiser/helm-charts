@@ -41,6 +41,34 @@ spec:
         {{- end }}
       {{- if ( or .Values.initContainers .Values.zalandoPostgresql.enabled ) }}
       initContainers:
+        {{- if .Values.cnpg.enabled }}
+        - name: check-postgresql-ready
+          image: "postgres:{{ .Values.cnpg.version }}"
+          command: ['bash', '-c',
+            'until pg_isready; do echo waiting for database be ready; sleep 2; done;']
+          args: []
+          env:
+            - name: PGHOST
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ include "vaultwarden.fullname" . }}-app"
+                  key: "hostname"
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ include "vaultwarden.fullname" . }}-app"
+                  key: "username"
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ include "vaultwarden.fullname" . }}-app"
+                  key: "password"
+            - name: PGDATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ include "vaultwarden.fullname" . }}-app"
+                  key: "database"
+        {{- end }}
         {{- if .Values.zalandoPostgresql.enabled }}
         - name: check-postgresql-ready
           image: "postgres:{{ .Values.zalandoPostgresql.version }}"
@@ -99,6 +127,13 @@ spec:
                 secretKeyRef:
                   name: {{ template "vaultwarden.fullname" . }}-admin-token
                   key: admin-token
+          {{- end }}
+          {{- if .Values.cnpg.enabled }}
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ include "vaultwarden.fullname" . }}-app"
+                  key: "database-url"
           {{- end }}
           {{- if .Values.zalandoPostgresql.enabled }}
             - name: POSTGRES_HOST

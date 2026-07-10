@@ -14,7 +14,11 @@ A Helm chart for deploying Vaultwarden to Kubernetes
 | additionalVolumeMounts | list | `[]` | Additional volume mounts |
 | additionalVolumes | object | `{}` | Additional volumes |
 | affinity | object | `{}` | Affinities |
+| cnpg.backup | object | `{}` |  |
 | cnpg.enabled | bool | `false` |  |
+| cnpg.instances | string | `"1"` |  |
+| cnpg.size | string | `"1Gi"` |  |
+| cnpg.version | string | `"18"` |  |
 | deploymentStrategy.type | string | `"Recreate"` |  |
 | fullnameOverride | string | `""` |  |
 | horizontalAutoscaling | object | `{"enabled":false,"maxReplicas":3,"minReplicas":1,"targetCPUUtilizationPercentage":75,"targetMemoryUtilizationPercentage":75}` | HPA configuration |
@@ -52,7 +56,7 @@ A Helm chart for deploying Vaultwarden to Kubernetes
 | zalandoPostgresql.resources.requests.cpu | string | `"250m"` |  |
 | zalandoPostgresql.resources.requests.memory | string | `"250Mi"` |  |
 | zalandoPostgresql.size | string | `"1Gi"` |  |
-| zalandoPostgresql.version | string | `"16"` |  |
+| zalandoPostgresql.version | string | `"18"` |  |
 
 ## Upgrading
 

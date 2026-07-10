@@ -71,6 +71,11 @@ jobs:
           helm install prometheus-operator-crds oci://ghcr.io/prometheus-community/charts/prometheus-operator-crds
         if: steps.list-changed.outputs.changed == 'true'
 
+      - name: Install CNPG
+        run: |
+          helm install --namespace cnpg-system --create-namespace --repo https://cloudnative-pg.github.io/charts cnpg cloudnative-pg
+        if: steps.list-changed.outputs.changed == 'true'
+
       - name: Run chart-testing (install)
         run: ct install --config .github/linters/ct.yaml
 
