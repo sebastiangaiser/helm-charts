@@ -21,5 +21,11 @@
       groupName: 'GitHub Actions',
       groupSlug: 'github-actions',
     },
+    {
+      description: 'Auto-merge non-major dependency updates already flagged for auto-merge (Helm charts + CI workflows). Major bumps stay manual.',
+      matchFileNames: ['charts/**', '.github/workflows/**'],
+      matchUpdateTypes: ['minor', 'patch', 'pin', 'digest'],
+      automerge: true,
+    },
   ],
 }
