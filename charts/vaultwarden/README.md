@@ -18,7 +18,11 @@ Kubernetes: `>=1.23.0`
 | additionalVolumeMounts | list | `[]` | Additional volume mounts |
 | additionalVolumes | object | `{}` | Additional volumes |
 | affinity | object | `{}` | Affinities |
+| cnpg.backup | object | `{}` |  |
 | cnpg.enabled | bool | `false` |  |
+| cnpg.instances | string | `"1"` |  |
+| cnpg.size | string | `"1Gi"` |  |
+| cnpg.version | string | `"18"` |  |
 | deploymentStrategy.type | string | `"Recreate"` |  |
 | fullnameOverride | string | `""` |  |
 | horizontalAutoscaling | object | `{"enabled":false,"maxReplicas":3,"minReplicas":1,"targetCPUUtilizationPercentage":75,"targetMemoryUtilizationPercentage":75}` | HPA configuration |

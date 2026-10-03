@@ -1,0 +1,22 @@
+{{- if .Values.cnpg.enabled -}}
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: {{ include "vaultwarden.fullname" . }}
+  labels:
+    {{- include "vaultwarden.labels" . | nindent 4 }}
+spec:
+  instances: {{ .Values.cnpg.instances | int }}
+  imageName: "ghcr.io/cloudnative-pg/postgresql:{{ .Values.cnpg.version }}"
+  bootstrap:
+    initdb:
+      database: vaultwarden
+      owner: vaultwarden
+  storage:
+    size: {{ .Values.cnpg.size | quote }}
+  {{- with .Values.cnpg.backup }}
+  backup:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+{{- end -}}
