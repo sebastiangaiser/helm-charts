@@ -17,7 +17,7 @@ spec:
   users:
     {{ include "vaultwarden.fullname" . }}: []
   databases:
-    {{ include "vaultwarden.fullname" . }}: "{{ include "vaultwarden.fullname" . }}" #dbname: owner
+    {{ include "vaultwarden.zalandoPostgresql.database" . }}: "{{ include "vaultwarden.fullname" . }}" #dbname: owner
   allowedSourceRanges: []
   resources:
     {{- toYaml .Values.zalandoPostgresql.resources | nindent 4 }}

@@ -61,7 +61,7 @@ spec:
                   name: "{{ include "vaultwarden.fullname" . }}.{{ .Values.zalandoPostgresql.teamId | default "acid" }}-{{ include "vaultwarden.fullname" . }}.credentials.postgresql.acid.zalan.do"
                   key: "password"
             - name: PGDATABASE
-              value: {{ include "vaultwarden.fullname" . }}
+              value: {{ include "vaultwarden.zalandoPostgresql.database" . }}
         {{- end }}
         {{- range $name, $properties := .Values.initContainers }}
         - name: {{ $name | quote }}
@@ -114,7 +114,7 @@ spec:
                   name: "{{ include "vaultwarden.fullname" . }}.{{ .Values.zalandoPostgresql.teamId | default "acid" }}-{{ include "vaultwarden.fullname" . }}.credentials.postgresql.acid.zalan.do"
                   key: "password"
             - name: DATABASE_URL
-              value: "postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(POSTGRES_HOST):5432/{{ include "vaultwarden.fullname" . }}"
+              value: "postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(POSTGRES_HOST):5432/{{ include "vaultwarden.zalandoPostgresql.database" . }}"
           {{- end }}
           {{- include "vaultwarden.extraEnvironmentVars" .Values | nindent 12 }}
           {{- end }}
