@@ -85,8 +85,6 @@ jobs:
         if: steps.list-changed.outputs.changed == 'true'
 
       - name: Apply Prometheus Operator CRDs
-        env:
-          CHANGED_LIST: ${{ steps.list-changed.outputs.changed_list }}
         run: |
           helm install prometheus-operator-crds oci://ghcr.io/prometheus-community/charts/prometheus-operator-crds
         if: steps.list-changed.outputs.changed == 'true'
