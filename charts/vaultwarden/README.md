@@ -7,6 +7,10 @@ A Helm chart for deploying Vaultwarden to Kubernetes
 * <https://github.com/dani-garcia/vaultwarden>
 * <https://github.com/sebastiangaiser/helm-charts/>
 
+## Requirements
+
+Kubernetes: `>=1.23.0`
+
 ## Values
 
 | Key | Type | Default | Description |
@@ -52,7 +56,7 @@ A Helm chart for deploying Vaultwarden to Kubernetes
 | zalandoPostgresql.resources.requests.cpu | string | `"250m"` |  |
 | zalandoPostgresql.resources.requests.memory | string | `"250Mi"` |  |
 | zalandoPostgresql.size | string | `"1Gi"` |  |
-| zalandoPostgresql.version | string | `"16"` |  |
+| zalandoPostgresql.version | string | `"18"` |  |
 
 ## Upgrading
 

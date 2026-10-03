@@ -15,7 +15,7 @@
   ],
   packageRules: [
     {
-      description: 'The prometheus-community/helm-charts preset disables every package outside charts/ and .github/workflows/, so re-enable the pre-commit hooks.',
+      description: 'The prometheus-community/helm-charts preset disables every package outside charts/ and .github/workflows/, so re-enable the hook versions in .pre-commit-config.yaml.',
       matchFileNames: ['.pre-commit-config.yaml'],
       enabled: true,
     },
