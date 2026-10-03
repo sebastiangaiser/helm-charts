@@ -62,6 +62,15 @@ Create the name of the service account to use
 {{- end }}
 
 {{/*
+Database name for the Zalando postgres-operator.
+The operator silently skips databases whose name does not match ^[a-zA-Z_][a-zA-Z0-9_]*$,
+so the hyphens a release name may carry have to become underscores.
+*/}}
+{{- define "vaultwarden.zalandoPostgresql.database" -}}
+{{- include "vaultwarden.fullname" . | replace "-" "_" }}
+{{- end }}
+
+{{/*
 Inject extra environment vars in the format key:value, if populated
 */}}
 {{- define "vaultwarden.extraEnvironmentVars" -}}
