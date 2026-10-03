@@ -5,10 +5,8 @@
   extends: [
     'config:recommended',
     'github>prometheus-community/helm-charts//renovate.json',
-    'github>sebastiangaiser/helm-charts//.github/renovate/customManagers.json5',
   ],
   semanticCommits: 'enabled',
-  timezone: 'Europe/Berlin',
   'pre-commit': {
     enabled: true,
   },
@@ -17,15 +15,25 @@
   ],
   packageRules: [
     {
-      matchManagers: ['github-actions'],
-      groupName: 'GitHub Actions',
-      groupSlug: 'github-actions',
+      description: 'The prometheus-community/helm-charts preset disables every package outside charts/ and .github/workflows/, so re-enable the pre-commit hooks.',
+      matchFileNames: ['.pre-commit-config.yaml'],
+      enabled: true,
     },
     {
       description: 'Auto-merge non-major dependency updates already flagged for auto-merge (Helm charts + CI workflows). Major bumps stay manual.',
       matchFileNames: ['charts/**', '.github/workflows/**'],
       matchUpdateTypes: ['minor', 'patch', 'pin', 'digest'],
       automerge: true,
+    },
+    {
+      matchPackageNames: ['kindest/node'],
+      separateMultipleMinor: true,
+    },
+    {
+      description: 'The tested Kubernetes minors are a conscious choice, only patch bumps are automatic.',
+      matchPackageNames: ['kindest/node'],
+      matchUpdateTypes: ['major', 'minor'],
+      enabled: false,
     },
   ],
 }

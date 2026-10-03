@@ -1,3 +1,4 @@
+---
 name: Lint and Test Charts
 permissions: {}
 
@@ -13,16 +14,34 @@ jobs:
       contents: read
     strategy:
       matrix:
-        k8s-version:
-          - "kindest/node:v1.32.11"
-          - "kindest/node:v1.33.7"
-          - "kindest/node:v1.34.3"
-          - "kindest/node:v1.35.1"
+        # major and minor need manual adjustments
+        include:
+          # renovate: docker=kindest/node
+          - k8s-version: v1.34.11
+          # renovate: docker=kindest/node
+          - k8s-version: v1.35.8
+          # renovate: docker=kindest/node
+          - k8s-version: v1.36.4
+          # renovate: docker=kindest/node
+          - k8s-version: v1.37.0
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           fetch-depth: 0
+
+      - name: Run helm-unittest
+        # helm-unittest does not support Helm v4 yet, so this step uses v3
+        # https://github.com/helm-unittest/helm-unittest/issues/777
+        uses: d3adb5/helm-unittest-action@985d798b675caa501251573380b5e026ff768c50 # v2.5.1
+        with:
+          charts: charts/*
+          # renovate: github=helm/helm
+          helm-version: v4.3.0
+          # renovate: github=helm-unittest/helm-unittest
+          unittest-version: v1.2.1
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Helm
         uses: azure/setup-helm@9bc31f4ebc9c6b171d7bfbaa5d006ae7abdb4310 # v5.0.1
@@ -33,7 +52,8 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
-          python-version: '3.13'
+          # renovate: github=python/cpython
+          python-version: '3.14.8'
 
       - name: Set up chart-testing
         uses: helm/chart-testing-action@6ec842c01de15ebb84c8627d2744a0c2f2755c9f # v2.8.0
@@ -57,7 +77,7 @@ jobs:
         uses: helm/kind-action@06c1ae10762d3b9c1644e7fe69596ae519e015a2 # v1.15.0
         if: steps.list-changed.outputs.changed == 'true'
         with:
-          node_image: ${{ matrix.k8s-version }}
+          node_image: kindest/node:${{ matrix.k8s-version }}
 
       - name: Apply Gateway API CRDs
         run: |
@@ -79,29 +99,32 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      issues: write # post PR summary comment
+      pull-requests: write # post PR summary comment
     steps:
       - name: Checkout Code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           fetch-depth: 0
 
       - name: Lint Code Base
         uses: super-linter/super-linter/slim@2da136927bd4a73596db63044b504547c62cb854 # v9.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ENABLE_GITHUB_PULL_REQUEST_SUMMARY_COMMENT: true
           LINTER_RULES_PATH: .github/linters
-          ENABLE_COMMITLINT_STRICT_MODE: true
-          ENFORCE_COMMITLINT_CONFIGURATION_CHECK: true
           MULTI_STATUS: false
           VALIDATE_ALL_CODEBASE: false
           VALIDATE_BASH: true
           VALIDATE_BASH_EXEC: true
-          # VALIDATE_CHECKOV: true - always scans everything and all charts have too much errors
           VALIDATE_EDITORCONFIG: true
           VALIDATE_ENV: true
           VALIDATE_GITHUB_ACTIONS: true
+          VALIDATE_GITHUB_ACTIONS_ZIZMOR: true
           VALIDATE_GITLEAKS: true
           VALIDATE_JSON: true
+          VALIDATE_JSONC: true
           VALIDATE_MARKDOWN: true
           VALIDATE_NATURAL_LANGUAGE: true
           VALIDATE_PYTHON: true
