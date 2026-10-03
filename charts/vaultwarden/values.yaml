@@ -117,6 +117,10 @@ affinity: {}
 ## -- CNPG database configuration
 cnpg:
   enabled: false
+  backup: {}
+  version: "18"
+  instances: "1"
+  size: 1Gi
 
 ## -- Zalando PostgreSQL database configuration
 zalandoPostgresql:

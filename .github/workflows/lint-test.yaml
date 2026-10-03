@@ -104,6 +104,18 @@ jobs:
             --wait
         if: steps.list-changed.outputs.changed == 'true'
 
+      - name: Install CloudNativePG Operator
+        run: |
+          # renovate: helm=cloudnative-pg registry=https://cloudnative-pg.github.io/charts
+          CNPG_VERSION=0.29.1
+          helm install cnpg cloudnative-pg \
+            --repo https://cloudnative-pg.github.io/charts \
+            --version "${CNPG_VERSION}" \
+            --namespace cnpg-system \
+            --create-namespace \
+            --wait
+        if: steps.list-changed.outputs.changed == 'true'
+
       - name: Run chart-testing (install)
         run: ct install --config .github/linters/ct.yaml
 
