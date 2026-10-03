@@ -5,6 +5,7 @@ Deprecated: This chart will not receive any further updates!
 A Helm chart for deploying capacitor, a general purpose UI for FluxCD
 
 ## Network policies
+
 Currently only Kubernetes native `NetworkPolicy` is supported.
 Check the values how to configure the flavor.
 
