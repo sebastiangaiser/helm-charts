@@ -104,7 +104,7 @@ jobs:
       - name: Install CloudNativePG Operator
         run: |
           # renovate: helm=cloudnative-pg registry=https://cloudnative-pg.github.io/charts
-          CNPG_VERSION=0.29.1
+          CNPG_VERSION=0.29.2
           helm install cnpg cloudnative-pg \
             --repo https://cloudnative-pg.github.io/charts \
             --version "${CNPG_VERSION}" \
